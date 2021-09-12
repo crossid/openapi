@@ -1,0 +1,5 @@
+create_namespace_request:
+  value:
+    id: mysaas
+    displayName: My SAAS
+    publicTenantRegistration: false

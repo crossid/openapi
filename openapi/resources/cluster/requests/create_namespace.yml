@@ -1,0 +1,9 @@
+description: A namespace, in JSON format.
+
+content:
+  application/json:
+    schema:
+      $ref: ../models/create_namespace_request.yml
+    examples:
+      namespace:
+        $ref: examples.yml#/create_namespace_request

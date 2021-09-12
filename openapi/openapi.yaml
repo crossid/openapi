@@ -28,12 +28,23 @@ tags:
     description: >-
       Secrets are sensitive data that should be encrypted, such secrets can then be used in various places such as _apps_.
       an example could be a remote app that may need to store password for authentication.
+x-tagGroups:
+  - name: Tenant API
+    tags:
+      - Secrets
+  - name: Global
+    tags:
+      - Namespaces
+      - Health
 paths:
   /api/v1/secrets/{path}:
     get:
       $ref: resources/secrets/get_secret.yml
     put:
       $ref: resources/secrets/put_secret.yml
+  /api/global/v1/namespaces:
+    post:
+      $ref: resources/cluster/create_namespace.yml
   /api/global/v1/health/ready:
     get:
       $ref: resources/health/ready.yml
@@ -51,3 +62,7 @@ components:
           scopes:
             'read:users': read users info
             'write:users': modify or remove users
+    namespaceApiKey:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

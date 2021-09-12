@@ -1,0 +1,5 @@
+description: Create Namespace Response.
+type: object
+properties:
+  token:
+    type: string

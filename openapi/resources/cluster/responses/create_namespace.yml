@@ -1,0 +1,17 @@
+description: A namespace, in JSON format.
+
+content:
+  application/json:
+    schema:
+      $ref: ../models/create_namespace_response.yml
+    examples:
+      namespace:
+        $ref: examples.yml#/create_namespace_response
+
+headers:
+  ratelimit-limit:
+    $ref: ../../../shared/headers.yml#/ratelimit-limit
+  ratelimit-remaining:
+    $ref: ../../../shared/headers.yml#/ratelimit-remaining
+  ratelimit-reset:
+    $ref: ../../../shared/headers.yml#/ratelimit-reset

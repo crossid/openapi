@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $CID_NS_TOKEN" \
+    -d '{"id": "mysaas", "displayName": "My SAAS", "publicTenantRegistration": false}' \
+    "https://mysaas.crossid.io/api/global/v1/namespaces"

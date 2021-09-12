@@ -1,0 +1,9 @@
+description: A request to create a namespace.
+type: object
+properties:
+  id:
+    type: string
+  displayName:
+    type: string
+  publicTenantRegistration:
+    type: boolean
