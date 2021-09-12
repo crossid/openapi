@@ -1,0 +1,27 @@
+description: Error
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/error.yml'
+    examples:
+      '400':
+        $ref: examples.yml#/bad_request
+      '401':
+        $ref: examples.yml#/unauthorized
+      '403':
+        $ref: examples.yml#/forbidden
+      '404':
+        $ref: examples.yml#/not_found
+      '429':
+        $ref: examples.yml#/too_many_requests
+      '500':
+        $ref: examples.yml#/internal_error
+
+headers:
+  ratelimit-limit:
+    $ref: '../headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../headers.yml#/ratelimit-reset'

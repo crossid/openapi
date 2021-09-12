@@ -1,0 +1,29 @@
+bad_request:
+  value:
+    status: '400'
+    detail: Bad Request
+
+unauthorized:
+  value:
+    status: '401'
+    detail: 'client is not authenticated.'
+
+forbidden:
+  value:
+    status: '43'
+    detail: 'the request action is forbidden.'
+
+not_found:
+  value:
+    status: '404'
+    detail: The requested resource could not be found
+
+too_many_requests:
+  value:
+    status: '429'
+    detail: API Rate limit exceeded.
+
+internal_error:
+  value:
+    status: '500'
+    detail: Internal Server Error

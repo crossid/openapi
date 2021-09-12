@@ -1,0 +1,23 @@
+type: object
+
+properties:
+  status:
+    description: >-
+      The HTTP status code (see [RFC7231](https://datatracker.ietf.org/doc/html/rfc7231#section-6)) expressed as a JSON string.
+    type: string
+    example: not_found
+
+  type:
+    description: >-
+      A detail error keyword.
+    type: string
+    example: tooMany
+
+  detail:
+    description: >-
+      A message providing additional information about the error, including 
+      details to help resolve it when possible.
+    type: string
+    example: The resource you were accessing could not be found.
+required:
+  - status

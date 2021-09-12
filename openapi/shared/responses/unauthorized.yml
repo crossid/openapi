@@ -1,0 +1,16 @@
+description: Client is not authenticated.
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/error.yml'
+    example:
+      $ref: examples.yml#/unauthorized
+
+headers:
+  ratelimit-limit:
+    $ref: '../headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../headers.yml#/ratelimit-reset'

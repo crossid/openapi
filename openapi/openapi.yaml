@@ -1,0 +1,47 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Crossid API
+  termsOfService: 'https://crossid.io/tos'
+  contact:
+    name: Crossid API Team
+    email: api-engineering@crossid.io
+  license:
+    name: Proprietary
+    url: 'https://www.crossid.io/lic'
+  x-logo:
+    url: 'https://www.crossid.io/logo.png'
+  description:
+    $ref: ./info-description.md
+externalDocs:
+  description: Find out more about CrossID
+  url: 'https://www.crossid.io'
+servers:
+  - url: https://{tenant}.crossid.io/api/v1
+    variables:
+      tenant:
+        default: acme
+        description: Tenant Identifier
+    description: Development
+tags:
+  - name: Secrets
+    description: >-
+      Secrets are sensitive data that should be encrypted, such secrets can then be used in various places such as _apps_.
+      an example could be a remote app that may need to store password for authentication.
+paths:
+  /api/v1/secrets/{path}:
+    get:
+      $ref: resources/secrets/get_secret.yml
+    put:
+      $ref: resources/secrets/put_secret.yml
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://{tenant}.crossid.io/oauth2/auth'
+          tokenUrl: 'https://{tenant}.crossid.io/oauth2/token'
+          scopes:
+            'read:users': read users info
+            'write:users': modify or remove users
