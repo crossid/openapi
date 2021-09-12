@@ -1,0 +1,15 @@
+operationId: healthAlive
+summary: Check aliveness
+description: |
+  This endpoint returns an ok status (200) if the node is healthy or service unavailable (503) otherwise.
+
+  This endpoint does not check the aliveness of a cluster rather a single node.
+tags:
+  - Health
+responses:
+  '200':
+    $ref: responses/health.yml
+  default:
+    $ref: ../../shared/responses/default_error.yml
+x-codeSamples:
+  - $ref: 'examples/curl/alive.yml'

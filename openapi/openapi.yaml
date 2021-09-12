@@ -34,6 +34,12 @@ paths:
       $ref: resources/secrets/get_secret.yml
     put:
       $ref: resources/secrets/put_secret.yml
+  /api/global/v1/health/ready:
+    get:
+      $ref: resources/health/ready.yml
+  /api/global/v1/health/alive:
+    get:
+      $ref: resources/health/alive.yml
 components:
   securitySchemes:
     oauth2:

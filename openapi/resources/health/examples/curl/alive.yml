@@ -1,0 +1,5 @@
+lang: cURL
+source: |-
+  curl -X GET \
+    -H "Content-Type: application/json" \
+    "https://{tenant}.crossid.io/api/global/v1/health/alive"
