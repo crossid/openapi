@@ -1,0 +1,28 @@
+tenant:
+  value:
+    id: acme
+    active: true
+    namespace: root
+    host: acme.crossid.io
+    displayName: ACME
+    subscriptions:
+      - directory
+    meta:
+      resourceType: 'Tenant'
+      created: '2021-09-12T22:18:30.28Z'
+      lastModified: '2021-09-12T22:18:30.28Z'
+      revision: 0
+      location: /tenants/acme
+      tenantId: _
+      appId: '_'
+
+tenant_registration_response:
+  value:
+    result: ok
+
+tenant_sanitized:
+  value:
+    id: acme
+    active: true
+    host: acme.crossid.io
+    displayName: ACME

@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $CID_NS_TOKEN" \
+    -d '{"displayName": "ACME", "tenantId": "acme", "type": "developer", "user": {"email": "marvin@acme.io", "displayName": "Marvin Acme", "password": "ToonTown0z!"}}' \
+    "https://{namespace}.crossid.io/api/v1/tenants/acme"

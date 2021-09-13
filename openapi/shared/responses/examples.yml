@@ -27,3 +27,11 @@ internal_error:
   value:
     status: '500'
     detail: Internal Server Error
+
+validation_error:
+  value:
+    status: '400'
+    detail: 'Validation error'
+    validation:
+      - propertyPath: /displayName
+        message: 'zero value'

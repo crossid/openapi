@@ -1,0 +1,17 @@
+description: Error while performing model validation.
+
+content:
+  application/json:
+    schema:
+      $ref: '../models/error.yml'
+    examples:
+      validation:
+        $ref: examples.yml#/validation_error
+
+headers:
+  ratelimit-limit:
+    $ref: '../headers.yml#/ratelimit-limit'
+  ratelimit-remaining:
+    $ref: '../headers.yml#/ratelimit-remaining'
+  ratelimit-reset:
+    $ref: '../headers.yml#/ratelimit-reset'

@@ -1,0 +1,24 @@
+id:
+  description: The tenant ID
+  in: path
+  name: id
+  required: true
+  schema:
+    type: string
+  example: acme
+host:
+  description: The tenant public host (DNS name).
+  in: query
+  name: host
+  required: true
+  schema:
+    type: string
+  example: acme.crossid.io
+activation:
+  description: The tenant activation key
+  in: query
+  name: activation
+  required: true
+  schema:
+    type: string
+    example: qTsBuJJEhCEzryZ_jk9Ucb0gMUVTBFqEJRcwd_z57R4=

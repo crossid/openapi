@@ -1,0 +1,22 @@
+description: Tenant registration request.
+type: object
+properties:
+  tenantId:
+    type: string
+  displayName:
+    type: string
+  type:
+    type: string
+    enum:
+      - developer
+  user:
+    type: object
+    properties:
+      email:
+        type: string
+      displayName:
+        type: string
+      password:
+        type: string
+  meta:
+    $ref: ../../../shared/models/meta.yml

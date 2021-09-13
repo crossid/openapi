@@ -32,19 +32,50 @@ x-tagGroups:
   - name: Tenant API
     tags:
       - Secrets
+      - Tenants
   - name: Global
     tags:
       - Namespaces
+      - Global Tenants
       - Health
 paths:
+  # tenants
+  #
+  /api/v1/tenants/{id}:
+    get:
+      $ref: resources/tenants/get_tenant.yml
+    put:
+      $ref: resources/tenants/replace_tenant.yml
+    patch:
+      $ref: resources/tenants/patch_tenant.yml
+  /api/global/v1/tenants:
+    post:
+      $ref: resources/tenants/create_tenant.yml
+    get:
+      $ref: resources/tenants/get_tenant_public.yml
+  /api/global/v1/tenants/.register:
+    post:
+      $ref: resources/tenants/register_tenant.yml
+  /api/global/v1/tenants/.activate:
+    post:
+      $ref: resources/tenants/activate_tenant.yml
+  /api/global/v1/tenants/{id}:
+    delete:
+      $ref: resources/tenants/delete_tenant.yml
+  # secrets
+  #
   /api/v1/secrets/{path}:
     get:
       $ref: resources/secrets/get_secret.yml
     put:
       $ref: resources/secrets/put_secret.yml
+  # namespace
+  #
   /api/global/v1/namespaces:
     post:
       $ref: resources/cluster/create_namespace.yml
+  # health
+  #
   /api/global/v1/health/ready:
     get:
       $ref: resources/health/ready.yml

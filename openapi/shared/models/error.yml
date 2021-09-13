@@ -19,5 +19,17 @@ properties:
       details to help resolve it when possible.
     type: string
     example: The resource you were accessing could not be found.
+
+  validation:
+    type: array
+    items:
+      properties:
+        propertyPath:
+          type: string
+        invalidValue:
+          # todo can be any type
+          type: string
+        message:
+          type: string
 required:
   - status

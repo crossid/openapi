@@ -1,0 +1,20 @@
+operationId: delTenant
+summary: Delete an existing tenant, along with its resources.
+description: |
+  Delete an existing tenant, along with all of its associated resources.
+
+  **WARNING: This operation cannot be undone!**
+security:
+  - namespaceApiKey:
+      - delete:tenant
+tags:
+  - Global Tenants
+parameters:
+  - $ref: parameters.yml#/id
+responses:
+  '204':
+    $ref: ../../shared/responses/no_content.yml
+  default:
+    $ref: ../../shared/responses/default_error.yml
+x-codeSamples:
+  - $ref: 'examples/curl/del_tenant.yml'

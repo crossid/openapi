@@ -1,0 +1,10 @@
+description: A patch.
+type: object
+properties:
+  Operations:
+    type: array
+    items:
+      $ref: ./patch_op.yml
+  Revision:
+    type: integer
+    format: int64

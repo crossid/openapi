@@ -1,0 +1,6 @@
+description: Tenant registration response.
+type: object
+properties:
+  result:
+    type: string
+    enum: [ok]

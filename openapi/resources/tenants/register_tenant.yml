@@ -1,0 +1,17 @@
+operationId: registerTenant
+summary: Register a new Tenant
+description: |
+  Register a new tenant with the given payload.
+
+  This is a poublic endpoint and requires activation.
+tags:
+  - Global Tenants
+requestBody:
+  $ref: requests/create_or_register_tenant.yml
+responses:
+  '200':
+    $ref: responses/register_tenant.yml
+  default:
+    $ref: ../../shared/responses/default_error.yml
+x-codeSamples:
+  - $ref: 'examples/curl/register_tenant.yml'

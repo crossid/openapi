@@ -1,0 +1,9 @@
+description: A patch, in JSON format.
+
+content:
+  application/json:
+    schema:
+      $ref: ../../../shared/models/patch.yml
+    examples:
+      tenant:
+        $ref: ./examples.yml#/patch_tenant

@@ -1,0 +1,12 @@
+description: A patch operation.
+type: object
+properties:
+  op:
+    type: string
+    enum: [add, replace, remove]
+  path:
+    type: string
+  value:
+    # TODO type can be anything
+    example: foo
+required: [op, path, value]

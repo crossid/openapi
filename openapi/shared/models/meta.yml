@@ -1,0 +1,27 @@
+description: Describes metadata of a model.
+type: object
+properties:
+  tenantId:
+    type: string
+  appId:
+    type: string
+  resourceType:
+    type: string
+  created:
+    type: string
+    format: date-time
+  lastModified:
+    type: string
+    format: date-time
+  revision:
+    type: number
+  location:
+    type: string
+required:
+  - tenantId
+  - appId
+  - resourceType
+  - created
+  - lastModified
+  - revision
+  - location

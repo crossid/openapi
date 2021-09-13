@@ -1,0 +1,21 @@
+operationId: replaceTenant
+summary: Replace an existing Tenant
+description: Replace an existing tenant with the given one.
+security:
+  - oauth2:
+      - write:tenant
+tags:
+  - Tenants
+parameters:
+  - $ref: parameters.yml#/id
+requestBody:
+  $ref: requests/replace_tenant.yml
+responses:
+  '200':
+    $ref: responses/tenant.yml
+  '400':
+    $ref: ../../shared/responses/validation_error.yml
+  default:
+    $ref: ../../shared/responses/default_error.yml
+x-codeSamples:
+  - $ref: 'examples/curl/replace_tenant.yml'
