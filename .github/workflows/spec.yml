@@ -1,0 +1,36 @@
+name: Spec PR
+# This workflow bundles a spec with the respective changes in a branch.
+
+on: workflow_dispatch
+
+jobs:
+  generate-preview:
+    name: Generate Preview
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+
+      - name: Bundle
+        run: |
+          npm install -ci
+          npm run build
+
+      - name: Commit
+        run: |
+          git config --global user.email "cicd@crossid.io"
+          git config --global user.name "CI CD"
+          git checkout -f --orphan spec
+          #ls | grep -v openapi.yaml | xargs rm -rf
+          git rm -r --cached .
+          git add -f openapi.yaml
+          git commit -m "spec file update."
+          git push origin HEAD:spec
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: openapi-bundled
+          path: openapi.yaml
