@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $CID_TOKEN" \
+    -d '{"id": "myAppUser", "name": "User", "attributes": [{"name": "userName", "type": "string"}]}' \
+    "https://{tenant}.crossid.io/api/v1/scim-schemas?reason=needed"

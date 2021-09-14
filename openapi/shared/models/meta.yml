@@ -19,9 +19,9 @@ properties:
     type: string
 required:
   - tenantId
-  - appId
+  #- appId
   - resourceType
-  - created
-  - lastModified
+  #- created
+  #- lastModified
   - revision
-  - location
+  #- location

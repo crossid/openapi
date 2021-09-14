@@ -1,0 +1,8 @@
+reason:
+  description: A descriptive reason of the change
+  in: query
+  name: reason
+  required: true
+  schema:
+    type: string
+  example: approved by ticket 4423.

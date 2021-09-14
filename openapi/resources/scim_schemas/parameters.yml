@@ -1,0 +1,8 @@
+id:
+  description: The schema ID
+  in: path
+  name: id
+  required: true
+  schema:
+    type: string
+  example: cidUser

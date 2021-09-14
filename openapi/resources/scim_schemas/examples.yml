@@ -1,0 +1,14 @@
+scimSchema:
+  value:
+    id: myAppUser
+    name: User
+    description: My App's User
+    attributes:
+      - name: userName
+        type: string
+      - name: customerId
+        type: string
+    meta:
+      revision: 2
+      tenantId: acme
+      resourceType: SCIMSchema

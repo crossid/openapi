@@ -1,0 +1,19 @@
+operationId: replaceSCIMSchema
+summary: Replace an existing SCIM Schema
+description: Create an existing SCIM Schema with the given payload.
+security:
+  - oauth2:
+      - write:scimSchema
+tags:
+  - Schemas
+parameters:
+  - $ref: ../../shared/parameters.yml#/reason
+requestBody:
+  $ref: requests/replace_schema.yml
+responses:
+  '200':
+    $ref: responses/schema.yml
+  default:
+    $ref: ../../shared/responses/default_error.yml
+x-codeSamples:
+  - $ref: 'examples/curl/replace_schema.yml'

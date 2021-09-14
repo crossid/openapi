@@ -1,0 +1,65 @@
+description: SCIM Attribute model.
+type: object
+properties:
+  name:
+    type: string
+    description: the name of the attribute.
+    example: phoneNumber
+  description:
+    type: string
+    description: a more detailed description.
+    example: phone numbers
+  type:
+    type: string
+    enum:
+      [string, boolean, binary, decimal, integer, dateTime, reference, complex]
+    example: string
+  referenceTypes:
+    type: array
+    description: indicates the resource types thatare referenced.
+    items:
+      type: string
+  multiValued:
+    type: boolean
+    description: true if this is a multi valued (array) attribute
+    example: false
+  required:
+    type: boolean
+    description: true if this attribute is required.
+  mutability:
+    type: string
+    enum: [readOnly, readWrite, immutable, writeOnly]
+    example: readWrite
+  returned:
+    type: string
+    enum: [always, never, default, request]
+    example: default
+  uniqueness:
+    type: string
+    enum: [none, server, global]
+  caseExact:
+    type: boolean
+    description: true if a string attribute is case sensitive.
+  canonicalValues:
+    type: array
+    description: A collection of suggested canonical values that MAY be used (e.g., "work", "home")
+    items:
+      type: string
+    example: work
+  noRevision:
+    type: boolean
+    description: true if a change of this attribute should not create a revision in history.
+  subAttributes:
+    type: array
+    items:
+      $ref: ./attribute.yml
+  search:
+    type: object
+    properties:
+      boost:
+        type: integer
+        example: 1
+      fuzziness:
+        type: integer
+        example: 2
+required: [name, type]

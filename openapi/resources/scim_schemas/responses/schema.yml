@@ -1,0 +1,17 @@
+description: A SCIM schema, in JSON format.
+
+content:
+  application/json:
+    schema:
+      $ref: ../models/scim_schema.yml
+    examples:
+      schema:
+        $ref: ../examples.yml#/scimSchema
+
+headers:
+  ratelimit-limit:
+    $ref: ../../../shared/headers.yml#/ratelimit-limit
+  ratelimit-remaining:
+    $ref: ../../../shared/headers.yml#/ratelimit-remaining
+  ratelimit-reset:
+    $ref: ../../../shared/headers.yml#/ratelimit-reset

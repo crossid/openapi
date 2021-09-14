@@ -1,0 +1,17 @@
+operationId: getSCIMSchema
+summary: Retrieve an existing SCIM Schema.
+description: Retrieve details about an existing SCIM Schema by its id.
+security:
+  - oauth2:
+      - read:scimSchema
+tags:
+  - Schemas
+parameters:
+  - $ref: parameters.yml#/id
+responses:
+  '200':
+    $ref: responses/schema.yml
+  default:
+    $ref: ../../shared/responses/default_error.yml
+x-codeSamples:
+  - $ref: 'examples/curl/get_schema.yml'

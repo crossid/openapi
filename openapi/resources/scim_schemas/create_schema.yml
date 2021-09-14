@@ -1,0 +1,19 @@
+operationId: createSCIMSchema
+summary: Create a new SCIM Schema
+description: Create a new SCIM Schema with the given payload.
+security:
+  - oauth2:
+      - write:scimSchema
+tags:
+  - Schemas
+parameters:
+  - $ref: ../../shared/parameters.yml#/reason
+requestBody:
+  $ref: requests/create_schema.yml
+responses:
+  '200':
+    $ref: responses/schema.yml
+  default:
+    $ref: ../../shared/responses/default_error.yml
+x-codeSamples:
+  - $ref: 'examples/curl/create_schema.yml'

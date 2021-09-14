@@ -1,0 +1,18 @@
+description: SCIM Schema model.
+type: object
+properties:
+  id:
+    type: string
+    description: unique identifier of the schema.
+  name:
+    type: string
+    description: the name of the schema.
+  description:
+    type: string
+    description: a more detailed description.
+  attributes:
+    type: array
+    items:
+      $ref: ./attribute.yml
+  meta:
+    $ref: ../../../shared/models/meta.yml

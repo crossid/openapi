@@ -31,6 +31,7 @@ tags:
 x-tagGroups:
   - name: Tenant API
     tags:
+      - Schemas
       - Secrets
       - Tenants
   - name: Global
@@ -62,6 +63,16 @@ paths:
   /api/global/v1/tenants/{id}:
     delete:
       $ref: resources/tenants/delete_tenant.yml
+  # scim schemas
+  #
+  /api/v1/scim-schemas:
+    post:
+      $ref: resources/scim_schemas/create_schema.yml
+  /api/v1/scim-schemas/{id}:
+    get:
+      $ref: resources/scim_schemas/get_schema.yml
+    put:
+      $ref: resources/scim_schemas/replace_schema.yml
   # secrets
   #
   /api/v1/secrets/{path}:
