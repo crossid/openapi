@@ -28,7 +28,7 @@ jobs:
           git rm -r --cached .
           git add -f openapi.yaml
           git commit -m "spec file update."
-          git push origin HEAD:spec
+          git push origin HEAD:spec -f
 
       - uses: actions/upload-artifact@v2
         with:
