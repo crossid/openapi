@@ -31,9 +31,10 @@ tags:
 x-tagGroups:
   - name: Tenant API
     tags:
-      - Schemas
       - Secrets
       - Tenants
+      - Schemas
+      - Resource Types
   - name: Global
     tags:
       - Namespaces
@@ -73,6 +74,18 @@ paths:
       $ref: resources/scim_schemas/get_schema.yml
     put:
       $ref: resources/scim_schemas/replace_schema.yml
+  # resource types
+  #
+  /api/v1/resource-types:
+    get:
+      $ref: resources/resource_types/list_resource_types.yml
+    post:
+      $ref: resources/resource_types/create_resource_type.yml
+  /api/v1/resource-types/{id}:
+    get:
+      $ref: resources/resource_types/get_resource_type.yml
+    put:
+      $ref: resources/resource_types/replace_resource_type.yml
   # secrets
   #
   /api/v1/secrets/{path}:

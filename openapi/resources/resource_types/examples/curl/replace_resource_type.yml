@@ -1,0 +1,7 @@
+lang: cURL
+source: |-
+  curl -X PUT \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $CID_TOKEN" \
+    -d '{"name": "User", "appId": "myapp", "schema": "scimUser", "mode": "local"}' \
+    "https://acme.crossid.io/api/v1/resource-types/T9e682kLYG6iYFSjo5RJVW?reason=my-app"

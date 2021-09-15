@@ -1,0 +1,62 @@
+description: ResourceType model.
+type: object
+properties:
+  id:
+    type: string
+    description: unique identifier of the resource type.
+  name:
+    type: string
+    description: the resourec type name, starting with uppercase, no spaces allowed. e.g. ("User", "ServiceAccount")
+  appId:
+    type: string
+    description: all resource types belongs to some app, this is the identifier where this resource type belongs to (e.g., "myapp")
+  description:
+    type: string
+    description: a more detailed description.
+  mode:
+    type: string
+    enum: ['local', 'remote']
+    description: |
+      *local* mode means that resources of this resource type are managed internally within the store. where *remote* mode means that resources
+      are managed externally, this remote mode, any changes made to resources will be provisioned to the external app.
+  schema:
+    type: string
+    description: The id of the primary schema for this resource type. (e.g., "scimUser")
+  schemaInterfaces:
+    type: array
+    items:
+      $ref: ./resource_type_schema_ext.yml
+    description: a list of schema interfaces, each interface's attributes will be merged directly into the primary schema.
+  schemaExtensions:
+    type: array
+    items:
+      $ref: ./resource_type_schema_ext.yml
+    description: a list of schema extensions, each extension will be mounted into the primary schema under its name.
+  toApp:
+    type: string
+    description: |
+      The ID of the mapper that maps attributes from this resource type form to their app representation.
+
+      only applied for *remote* resources.
+  toStore:
+    type: string
+    description: |
+      The ID of the mapper that maps attributes from their app representation to the form of this resource type.
+
+      only applied for *remote* resources.
+  ui:
+    type: object
+    description: Contains hints for the UI how to render this resource type.
+    properties:
+      overview:
+        type: array
+        items:
+          type: string
+        description: The attributes to display in the resource page.
+      edit:
+        type: array
+        items:
+          type: string
+        description: The attributes to let client edit.
+  meta:
+    $ref: ../../../shared/models/meta.yml

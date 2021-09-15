@@ -1,0 +1,17 @@
+operationId: getResourceType
+summary: Retrieve an existing Resource Type.
+description: Retrieve details about an existing Resource Type by its id.
+security:
+  - oauth2:
+      - read:resourceType
+tags:
+  - Resource Types
+parameters:
+  - $ref: parameters.yml#/id
+responses:
+  '200':
+    $ref: responses/resource_type.yml
+  default:
+    $ref: ../../shared/responses/default_error.yml
+x-codeSamples:
+  - $ref: 'examples/curl/get_resource_type.yml'

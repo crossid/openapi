@@ -1,0 +1,6 @@
+createResourceType:
+  value:
+    name: User
+    appId: myApp
+    schema: scimUser
+    mode: local

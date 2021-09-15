@@ -1,0 +1,9 @@
+description: A Resource Type in JSON format.
+
+content:
+  application/json:
+    schema:
+      $ref: ../models/resource_type.yml
+    examples:
+      schema:
+        $ref: ../examples.yml#/resourceType

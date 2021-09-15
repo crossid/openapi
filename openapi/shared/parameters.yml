@@ -6,3 +6,98 @@ reason:
   schema:
     type: string
   example: approved by ticket 4423.
+
+sortOrder:
+  name: sortOrder
+  in: query
+  schema:
+    type: string
+    enum: [ascending, descending]
+  description: A string indicating the order in which the "sortBy" parameter is applied.  Allowed values are "ascending" and "descending".
+  example: ascending
+
+filter:
+  name: filter
+  in: query
+  description: >
+    The filter string used to request a subset of models.
+  schema:
+    type: string
+    example: 'displayName sw "smith"'
+
+count:
+  name: count
+  in: query
+  description: >
+    The desired maximum number of query results per page, e.g., 10.
+    A negative value is interpreted as "0".
+    A value of "0" indicates that no model results are to be returned except for "totalResults".
+  schema:
+    type: integer
+    format: int64
+    default: 10
+
+startIndex:
+  name: startIndex
+  in: query
+  description: >
+    The 1-based index of the first query result. A value less than 1 SHALL be interpreted as 1.
+  schema:
+    type: integer
+    format: int64
+    default: 0
+
+sortBy:
+  name: sortBy
+  in: query
+  description: A string indicating the attribute whose value SHALL be used to order the returned responses.
+  example: userName
+  schema:
+    type: string
+
+attributes:
+  name: attributes
+  in: query
+  description: >
+    A multi-valued list of strings indicating the
+    names of resource attributes to return in the response,
+    overriding the set of attributes that would be returned by default.
+  schema:
+    type: array
+    items:
+      type: string
+    example: ['userName', 'displayName']
+
+excludedAttributes:
+  name: excludedAttributes
+  in: query
+  description: >
+    A multi-valued list of strings indicating the
+    names of resource attributes to be removed from the default set of
+    attributes to return.  This parameter SHALL have no effect on
+    attributes whose schema "returned" setting is "always".
+  schema:
+    type: array
+    items:
+      type: string
+    example: ['meta', 'groups']
+
+forTime:
+  name: forTime
+  in: query
+  description: >
+    a date time indicating that the requested resources should be
+    retrieved from history as how they looked for the specified time.
+  schema:
+    type: string
+    format: date-time
+  example: '2020-18-01T15:04:05-07:00'
+
+correlation:
+  name: correlation
+  in: query
+  description: >
+    a unique identifier of an external resource where this change should be correlated to
+  schema:
+    type: string
+  example: /flows/1234

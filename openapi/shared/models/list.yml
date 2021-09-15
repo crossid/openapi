@@ -1,0 +1,16 @@
+description: A list of models.
+type: object
+# TODO hack until https://github.com/Redocly/openapi-cli/issues/235
+additionalProperties: true
+properties:
+  totalResults:
+    type: integer
+    format: int64
+    example: 100
+  itemsPerPage:
+    type: integer
+    example: 10
+  startIndex:
+    type: integer
+    format: int64
+    example: 1

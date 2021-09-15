@@ -1,0 +1,9 @@
+description: ResourceType schema extension.
+type: object
+properties:
+  schema:
+    type: string
+    description: The id of the schema (e.g., "risk")
+  required:
+    type: boolean
+    description: True if every resource must have this schema extension.

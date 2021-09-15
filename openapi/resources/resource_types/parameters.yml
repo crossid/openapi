@@ -1,0 +1,8 @@
+id:
+  description: The resource type ID
+  in: path
+  name: id
+  required: true
+  schema:
+    type: string
+  example: T9e682kLYG6iYFSjo5RJVW

@@ -1,0 +1,24 @@
+operationId: listResourceTypes
+summary: List existing Resource Types.
+description: Retrieve a list of existing Resource Types.
+security:
+  - oauth2:
+      - read:resourceType
+tags:
+  - Resource Types
+parameters:
+  - $ref: ../../shared/parameters.yml#/filter
+  - $ref: ../../shared/parameters.yml#/count
+  - $ref: ../../shared/parameters.yml#/startIndex
+  - $ref: ../../shared/parameters.yml#/sortBy
+  - $ref: ../../shared/parameters.yml#/sortOrder
+  - $ref: ../../shared/parameters.yml#/attributes
+  - $ref: ../../shared/parameters.yml#/excludedAttributes
+  - $ref: ../../shared/parameters.yml#/forTime
+responses:
+  '200':
+    $ref: responses/list_resource_types.yml
+  default:
+    $ref: ../../shared/responses/default_error.yml
+x-codeSamples:
+  - $ref: 'examples/curl/list_resource_types.yml'

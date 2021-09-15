@@ -1,0 +1,13 @@
+description: A list of resource types.
+allOf:
+  - $ref: ../../../shared/models/list.yml
+  - type: object
+    required:
+      - Resources
+    # TODO hack until https://github.com/Redocly/openapi-cli/issues/235
+    additionalProperties: true
+    properties:
+      Resources:
+        type: array
+        items:
+          $ref: ./resource_type.yml

@@ -1,0 +1,45 @@
+resourceTypeList:
+  value:
+    totalResults: 6
+    itemsPerPage: 10
+    startIndex: 0
+    Resources:
+      # todo cannot find a way to ref in examples
+      - id: T9e682kLYG6iYFSjo5RJVW
+        name: User
+        appId: cid
+        description: Represents an identity.
+        mode: local
+        schema: cidUser
+        schemaInterfaces:
+          - schema: user
+            required: true
+          - schema: identity
+            required: true
+        schemaExtensions:
+          - schema: ownership
+            required: false
+        ui:
+          overview:
+            - displayName
+            - title
+            - name
+            - name.givenName
+            - name.familyName
+          edit:
+            - userName
+            - displayName
+            - active
+            - userType
+            - name
+            - name.givenName
+            - name.familyName
+            - groups
+        meta:
+          tenantId: acme
+          appId: '-'
+          resourceType: ResourceType
+          created: '2021-09-13T19:00:14.646Z'
+          lastModified: '2021-09-13T19:00:14.646Z'
+          revision: 1
+          location: '/resource-types/T9e682kLYG6iYFSjo5RJVW'

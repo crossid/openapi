@@ -1,0 +1,19 @@
+operationId: createResourceType
+summary: Create a new Resource Type
+description: Create a new Resource Type with the given payload.
+security:
+  - oauth2:
+      - write:resourceType
+tags:
+  - Resource Types
+parameters:
+  - $ref: ../../shared/parameters.yml#/reason
+requestBody:
+  $ref: requests/create_resource_type.yml
+responses:
+  '200':
+    $ref: responses/resource_type.yml
+  default:
+    $ref: ../../shared/responses/default_error.yml
+x-codeSamples:
+  - $ref: 'examples/curl/create_resource_type.yml'
