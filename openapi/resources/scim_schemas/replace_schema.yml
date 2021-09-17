@@ -7,6 +7,7 @@ security:
 tags:
   - Schemas
 parameters:
+  - $ref: parameters.yml#/id
   - $ref: ../../shared/parameters.yml#/reason
 requestBody:
   $ref: requests/replace_schema.yml
