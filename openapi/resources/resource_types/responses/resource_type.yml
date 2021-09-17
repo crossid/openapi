@@ -4,9 +4,9 @@ content:
   application/json:
     schema:
       $ref: ../models/resource_type.yml
-    #examples:
-    #  schema:
-    #    $ref: ../examples.yml#/resourceType
+    examples:
+      schema:
+        $ref: ../examples.yml#/resourceType
 
 headers:
   ratelimit-limit:
