@@ -1,5 +1,0 @@
-lang: cURL
-source: |-
-  curl -X GET \
-    -H "Content-Type: application/json" \
-    "https://{namespace}.crossid.io/api/global/v1/tenants?host=acme.crossid.io"

@@ -1,0 +1,15 @@
+job:
+  value:
+    id: T1e642kLYG3iZYGjo5REVW
+    error: Item already exists.
+    status: fatal
+    statusCode: 500
+    reason: Creating a new user.
+    meta:
+      tenantId: acme
+      appId: '-'
+      resourceType: Job
+      created: '2021-09-13T19:00:14.646Z'
+      lastModified: '2021-09-13T19:00:14.646Z'
+      revision: 1
+      location: '/jobs/T1e642kLYG3iZYGjo5REVW'

@@ -1,4 +1,5 @@
-id:
+# 'id' causes two schemas are referenced with the same name but different content. Renamed parameters_id to parameters_id-2.
+schemaId:
   description: The schema ID
   in: path
   name: id

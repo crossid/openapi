@@ -1,0 +1,24 @@
+operationId: listResourcesOfType
+summary: List resources of a specific type
+description: Retrieve a list of existing resources of a specific type.
+security:
+  - oauth2:
+      - resource.read
+tags:
+  - Resources
+parameters:
+  - $ref: ../../shared/parameters.yml#/filter
+  - $ref: ../../shared/parameters.yml#/count
+  - $ref: ../../shared/parameters.yml#/startIndex
+  - $ref: ../../shared/parameters.yml#/sortBy
+  - $ref: ../../shared/parameters.yml#/sortOrder
+  - $ref: ../../shared/parameters.yml#/attributes
+  - $ref: ../../shared/parameters.yml#/excludedAttributes
+  - $ref: ../../shared/parameters.yml#/forTime
+responses:
+  '200':
+    $ref: responses/list_resources.yml
+  default:
+    $ref: ../../shared/responses/default_error.yml
+x-codeSamples:
+  - $ref: 'examples/curl/list_resources_for_type.yml'

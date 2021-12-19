@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0.0
+  version: 2.0.0
   title: Crossid API
   termsOfService: 'https://crossid.io/tos'
   contact:
@@ -17,11 +17,14 @@ externalDocs:
   description: Find out more about CrossID
   url: 'https://www.crossid.io'
 servers:
-  - url: https://{tenant}.crossid.io/api/v1
+  - url: https://{tenant}.{region}.crossid.io/api/v1
     variables:
       tenant:
         default: acme
         description: Tenant Identifier
+      region:
+        defualt: us
+        description: The tenant region
     description: Development
 tags:
   - name: Secrets
@@ -31,39 +34,11 @@ tags:
 x-tagGroups:
   - name: Tenant API
     tags:
-      - Secrets
-      - Tenants
+      - Resources
       - Schemas
       - Resource Types
-  - name: Global
-    tags:
-      - Namespaces
-      - Global Tenants
-      - Health
+      - Jobs
 paths:
-  # tenants
-  #
-  /api/v1/tenants/{id}:
-    get:
-      $ref: resources/tenants/get_tenant.yml
-    put:
-      $ref: resources/tenants/replace_tenant.yml
-    patch:
-      $ref: resources/tenants/patch_tenant.yml
-  /api/global/v1/tenants:
-    post:
-      $ref: resources/tenants/create_tenant.yml
-    get:
-      $ref: resources/tenants/get_tenant_public.yml
-  /api/global/v1/tenants/.register:
-    post:
-      $ref: resources/tenants/register_tenant.yml
-  /api/global/v1/tenants/.activate:
-    post:
-      $ref: resources/tenants/activate_tenant.yml
-  /api/global/v1/tenants/{id}:
-    delete:
-      $ref: resources/tenants/delete_tenant.yml
   # scim schemas
   #
   /api/v1/scim-schemas:
@@ -86,38 +61,24 @@ paths:
       $ref: resources/resource_types/get_resource_type.yml
     put:
       $ref: resources/resource_types/replace_resource_type.yml
-  # secrets
+  # job
   #
-  /api/v1/secrets/{path}:
+  /api/v1/jobs/{id}:
     get:
-      $ref: resources/secrets/get_secret.yml
-    put:
-      $ref: resources/secrets/put_secret.yml
-  # namespace
+      $ref: resources/jobs/get_job.yml
+  # resources
   #
-  /api/global/v1/namespaces:
-    post:
-      $ref: resources/cluster/create_namespace.yml
-  # health
-  #
-  /api/global/v1/health/ready:
+  /api/v1/resources/{appID}/{resourceTypes}:
     get:
-      $ref: resources/health/ready.yml
-  /api/global/v1/health/alive:
-    get:
-      $ref: resources/health/alive.yml
+      $ref: resources/resources/list_resources_for_type.yml
 components:
   securitySchemes:
     oauth2:
       type: oauth2
       flows:
         authorizationCode:
-          authorizationUrl: 'https://{tenant}.crossid.io/oauth2/auth'
-          tokenUrl: 'https://{tenant}.crossid.io/oauth2/token'
+          authorizationUrl: 'https://crossid.us.crossid.io/oauth2/auth'
+          tokenUrl: 'https://crossid.us.crossid.io/oauth2/token'
           scopes:
-            'read:users': read users info
+            'manage:read:users': read users info
             'write:users': modify or remove users
-    namespaceApiKey:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT

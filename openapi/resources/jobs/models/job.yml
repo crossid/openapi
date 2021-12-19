@@ -1,0 +1,21 @@
+description: Job model.
+type: object
+properties:
+  id:
+    type: string
+    description: Unique identifier of the job.
+  error:
+    type: string
+    description: Error message in case of a failure.
+  status:
+    type: string
+    enum: ['enqueued', 'started', 'failed', 'fatal', 'canceled', 'success']
+    description: The current status of the job.
+  statusCode:
+    type: number
+    description: The current status code of the job, corresponds to http status codes.
+  reason:
+    type: string
+    description: A descriptive reason describing the purpose of the job.
+  meta:
+    $ref: ../../../shared/models/meta.yml

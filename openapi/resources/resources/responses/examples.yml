@@ -1,0 +1,26 @@
+resourceList:
+  value:
+    totalResults: 6
+    itemsPerPage: 10
+    startIndex: 0
+    Resources:
+      # todo cannot find a way to ref in examples
+      - id: HcRFTpgpmnUGSCEoj8wU4
+        displayName: John Doe
+        active: true
+        userName: john.doe@acme.io
+        name:
+          givenName: John
+          familyName: Doe
+        emails:
+          - primary: true
+            type: work
+            value: john.doe@acme.io
+        meta:
+          tenantId: acme
+          appId: iam
+          resourceType: User
+          created: '2021-09-13T19:00:14.646Z'
+          lastModified: '2021-09-13T19:00:14.646Z'
+          revision: 1
+          location: '/resources/cid/Users/HcRFTpgpmnUGSCEoj8wU4'

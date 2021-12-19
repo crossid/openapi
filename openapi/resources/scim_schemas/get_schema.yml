@@ -7,7 +7,7 @@ security:
 tags:
   - Schemas
 parameters:
-  - $ref: parameters.yml#/id
+  - $ref: parameters.yml#/schemaId
 responses:
   '200':
     $ref: responses/schema.yml

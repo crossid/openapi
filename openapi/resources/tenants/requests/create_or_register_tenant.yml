@@ -1,9 +1,0 @@
-description: A tenant registration request, in JSON format.
-
-content:
-  application/json:
-    schema:
-      $ref: ../models/tenant_registration_request.yml
-    examples:
-      tenant:
-        $ref: examples.yml#/create_tenant_request

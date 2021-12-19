@@ -1,7 +1,0 @@
-lang: cURL
-source: |-
-  curl -X PATCH \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer $CID_TOKEN" \
-    -d '{"Operations": [{"op": "replace", "path": "/displayName", "value": "my new company name"}]}' \
-    "https://{tenant}.crossid.io/api/v1/tenants/acme"

@@ -1,0 +1,8 @@
+id:
+  description: The job ID
+  in: path
+  name: id
+  required: true
+  schema:
+    type: string
+  example: T1e642kLYG3iZYGjo5REVW
