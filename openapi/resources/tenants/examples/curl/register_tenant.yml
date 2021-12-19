@@ -1,6 +1,0 @@
-lang: cURL
-source: |-
-  curl -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"displayName": "ACME", "tenantId": "acme", "type": "developer", "user": {"email": "marvin@acme.io", "displayName": "Marvin Acme", "password": "ToonTown0z!"}}' \
-    "https://{namespace}.crossid.io/api/global/v1/tenants/.register"

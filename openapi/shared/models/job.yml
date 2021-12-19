@@ -1,0 +1,14 @@
+description: A job model.
+type: object
+properties:
+  totalResults:
+    type: integer
+    format: int64
+    example: 100
+  itemsPerPage:
+    type: integer
+    example: 10
+  startIndex:
+    type: integer
+    format: int64
+    example: 1

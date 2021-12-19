@@ -3,4 +3,4 @@ source: |-
   curl -X GET \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $CID_TOKEN" \
-    "https://acme.crossid.io/api/v1/resource-types
+    "https://acme.us.crossid.io/api/v1/resource-types

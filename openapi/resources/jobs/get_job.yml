@@ -1,0 +1,17 @@
+operationId: getJob
+summary: Retrieve a Job.
+description: Retrieve details about an existing Job by its id.
+security:
+  - oauth2:
+      - job.read
+tags:
+  - Jobs
+parameters:
+  - $ref: parameters.yml#/id
+responses:
+  '200':
+    $ref: responses/job.yml
+  default:
+    $ref: ../../shared/responses/default_error.yml
+x-codeSamples:
+  - $ref: 'examples/curl/get_job.yml'

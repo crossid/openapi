@@ -1,0 +1,9 @@
+description: Resource model.
+type: object
+properties:
+  id:
+    type: string
+    description: unique identifier of the schema.
+  meta:
+    $ref: ../../../shared/models/meta.yml
+  additionalProperties: true

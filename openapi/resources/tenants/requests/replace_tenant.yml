@@ -1,9 +1,0 @@
-description: A tenant, in JSON format.
-
-content:
-  application/json:
-    schema:
-      $ref: ../models/tenant.yml
-    examples:
-      secret:
-        $ref: ../examples.yml#/tenant
