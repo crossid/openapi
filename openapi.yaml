@@ -1,0 +1,1180 @@
+openapi: 3.0.3
+info:
+  version: 2.0.0
+  title: Crossid API
+  termsOfService: https://crossid.io/tos
+  contact:
+    name: Crossid API Team
+    email: api-engineering@crossid.io
+  license:
+    name: Proprietary
+    url: https://www.crossid.io/lic
+  x-logo:
+    url: https://www.crossid.io/logo.png
+  description: >
+    # Introduction
+
+
+    Crossid API allows you to manage resources in a simple, programmatic way
+    using conventional HTTP requests.
+
+
+    All of the functionality that you are familiar with in the Crossid UI is
+    also available through this API,
+
+    allowing you to code actions that suites your requirements.
+
+
+    The rest of this page provides a general overview about the API design and
+    technology that has been implemented.
+
+
+    ## Requests
+
+
+    ## HTTP Statuses
+
+
+    ## Meta
+
+
+    ### Sample Links Object
+
+
+    ## Rate Limit
+
+
+    ## Curl Examples
+
+
+    ## OpenAPI Specification
+
+
+    Crossid API conforms the OpenAPI V3 specification.
+
+
+    The goal of The OpenAPI Specification is to define a standard,
+
+    language-agnostic interface to REST APIs which
+
+
+    allows both humans and computers to discover and understand the capabilities
+
+    of the service without access to source
+
+
+    code, documentation, or through network traffic inspection. When properly
+
+    defined via OpenAPI, a consumer can
+
+
+    understand and interact with the remote service with a minimal amount of
+
+    implementation logic. Similar to what
+
+
+    interfaces have done for lower-level programming, OpenAPI removes the
+
+    guesswork in calling the service.
+externalDocs:
+  description: Find out more about CrossID
+  url: https://www.crossid.io
+servers:
+  - url: https://{tenant}.{region}.crossid.io/api/v1
+    variables:
+      tenant:
+        default: acme
+        description: Tenant Identifier
+      region:
+        defualt: us
+        description: The tenant region
+    description: Development
+tags:
+  - name: Secrets
+    description: >-
+      Secrets are sensitive data that should be encrypted, such secrets can then
+      be used in various places such as _apps_. an example could be a remote app
+      that may need to store password for authentication.
+x-tagGroups:
+  - name: Tenant API
+    tags:
+      - Resources
+      - Schemas
+      - Resource Types
+      - Jobs
+paths:
+  /api/v1/scim-schemas:
+    post:
+      operationId: createSCIMSchema
+      summary: Create a new SCIM Schema
+      description: Create a new SCIM Schema with the given payload.
+      security:
+        - oauth2:
+            - write:scimSchema
+      tags:
+        - Schemas
+      parameters:
+        - $ref: '#/components/parameters/reason'
+      requestBody:
+        $ref: '#/components/requestBodies/create_schema'
+      responses:
+        '200':
+          $ref: '#/components/responses/schema'
+        default:
+          $ref: '#/components/responses/default_error'
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X POST \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $CID_TOKEN" \
+              -d '{"id": "myAppUser", "name": "User", "attributes": [{"name": "userName", "type": "string"}]}' \
+              "https://{tenant}.crossid.io/api/v1/scim-schemas?reason=needed"
+  /api/v1/scim-schemas/{id}:
+    get:
+      operationId: getSCIMSchema
+      summary: Retrieve an existing SCIM Schema.
+      description: Retrieve details about an existing SCIM Schema by its id.
+      security:
+        - oauth2:
+            - read:scimSchema
+      tags:
+        - Schemas
+      parameters:
+        - $ref: '#/components/parameters/schemaId'
+      responses:
+        '200':
+          $ref: '#/components/responses/schema'
+        default:
+          $ref: '#/components/responses/default_error'
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $CID_TOKEN" \
+              "https://{tenant}.crossid.io/api/v1/scim-schemas/cidUser"
+    put:
+      operationId: replaceSCIMSchema
+      summary: Replace an existing SCIM Schema
+      description: Create an existing SCIM Schema with the given payload.
+      security:
+        - oauth2:
+            - write:scimSchema
+      tags:
+        - Schemas
+      parameters:
+        - $ref: '#/components/parameters/schemaId'
+        - $ref: '#/components/parameters/reason'
+      requestBody:
+        $ref: '#/components/requestBodies/replace_schema'
+      responses:
+        '200':
+          $ref: '#/components/responses/schema'
+        default:
+          $ref: '#/components/responses/default_error'
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X PUT \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $CID_TOKEN" \
+              -d '{"id": "myAppUser", "name": "User", "attributes": [{"name": "userName", "type": "string"}, {"name": "customerId", "type": "string"}], "meta": {"revision": 1, "tenantId": "acme", "resourceType": "SCIMSchema"}}}' \
+              "https://acme.crossid.io/api/v1/scim-schemas/myAppUser?reason=needed"
+  /api/v1/resource-types:
+    get:
+      operationId: listResourceTypes
+      summary: List existing Resource Types.
+      description: Retrieve a list of existing Resource Types.
+      security:
+        - oauth2:
+            - read:resourceType
+      tags:
+        - Resource Types
+      parameters:
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/count'
+        - $ref: '#/components/parameters/startIndex'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+        - $ref: '#/components/parameters/attributes'
+        - $ref: '#/components/parameters/excludedAttributes'
+        - $ref: '#/components/parameters/forTime'
+      responses:
+        '200':
+          $ref: '#/components/responses/list_resource_types'
+        default:
+          $ref: '#/components/responses/default_error'
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $CID_TOKEN" \
+              "https://acme.us.crossid.io/api/v1/resource-types
+    post:
+      operationId: createResourceType
+      summary: Create a new Resource Type
+      description: Create a new Resource Type with the given payload.
+      security:
+        - oauth2:
+            - write:resourceType
+      tags:
+        - Resource Types
+      parameters:
+        - $ref: '#/components/parameters/reason'
+      requestBody:
+        $ref: '#/components/requestBodies/create_resource_type'
+      responses:
+        '200':
+          $ref: '#/components/responses/resource_type'
+        default:
+          $ref: '#/components/responses/default_error'
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X POST \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $CID_TOKEN" \
+              -d '{"name": "User", "appId": "myapp", "schema": "scimUser", "mode": "local"}' \
+              "https://acme.us.crossid.io/api/v1/resource-types?reason=my-app"
+  /api/v1/resource-types/{id}:
+    get:
+      operationId: getResourceType
+      summary: Retrieve an existing Resource Type.
+      description: Retrieve details about an existing Resource Type by its id.
+      security:
+        - oauth2:
+            - read:resourceType
+      tags:
+        - Resource Types
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          $ref: '#/components/responses/resource_type'
+        default:
+          $ref: '#/components/responses/default_error'
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $CID_TOKEN" \
+              "https://acme.us.crossid.io/api/v1/resource-types/T9e682kLYG6iYFSjo5RJVW"
+    put:
+      operationId: replaceResourceType
+      summary: Replace an existing Resource Type
+      description: Replace an existing Resource Type with the given payload.
+      security:
+        - oauth2:
+            - write:resourceType
+      tags:
+        - Resource Types
+      parameters:
+        - $ref: '#/components/parameters/id'
+        - $ref: '#/components/parameters/reason'
+      requestBody:
+        $ref: '#/components/requestBodies/replace_resource_type'
+      responses:
+        '200':
+          $ref: '#/components/responses/resource_type'
+        default:
+          $ref: '#/components/responses/default_error'
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X PUT \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $CID_TOKEN" \
+              -d '{"name": "User", "appId": "myapp", "schema": "scimUser", "mode": "local"}' \
+              "https://acme.us.crossid.io/api/v1/resource-types/T9e682kLYG6iYFSjo5RJVW?reason=my-app"
+  /api/v1/jobs/{id}:
+    get:
+      operationId: getJob
+      summary: Retrieve a Job.
+      description: Retrieve details about an existing Job by its id.
+      security:
+        - oauth2:
+            - job.read
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/parameters_id'
+      responses:
+        '200':
+          $ref: '#/components/responses/job'
+        default:
+          $ref: '#/components/responses/default_error'
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $CID_TOKEN" \
+              "https://acme.us.crossid.io/api/v1/jobs/T1e642kLYG3iZYGjo5REVW"
+  /api/v1/resources/{appID}/{resourceTypes}:
+    get:
+      operationId: listResourcesOfType
+      summary: List resources of a specific type
+      description: Retrieve a list of existing resources of a specific type.
+      security:
+        - oauth2:
+            - resource.read
+      tags:
+        - Resources
+      parameters:
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/count'
+        - $ref: '#/components/parameters/startIndex'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+        - $ref: '#/components/parameters/attributes'
+        - $ref: '#/components/parameters/excludedAttributes'
+        - $ref: '#/components/parameters/forTime'
+      responses:
+        '200':
+          $ref: '#/components/responses/list_resources'
+        default:
+          $ref: '#/components/responses/default_error'
+      x-codeSamples:
+        - lang: cURL
+          source: |-
+            curl -X GET \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $CID_TOKEN" \
+              "https://acme.us.crossid.io/api/v1/resources/Users
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://crossid.us.crossid.io/oauth2/auth
+          tokenUrl: https://crossid.us.crossid.io/oauth2/token
+          scopes:
+            manage:read:users: read users info
+            write:users: modify or remove users
+  parameters:
+    reason:
+      description: A descriptive reason of the change
+      in: query
+      name: reason
+      required: true
+      schema:
+        type: string
+      example: approved by ticket 4423.
+    schemaId:
+      description: The schema ID
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+      example: cidUser
+    filter:
+      name: filter
+      in: query
+      description: |
+        The filter string used to request a subset of models.
+      schema:
+        type: string
+        example: displayName sw "smith"
+    count:
+      name: count
+      in: query
+      description: >
+        The desired maximum number of query results per page, e.g., 10. A
+        negative value is interpreted as "0". A value of "0" indicates that no
+        model results are to be returned except for "totalResults".
+      schema:
+        type: integer
+        format: int64
+        default: 10
+    startIndex:
+      name: startIndex
+      in: query
+      description: >
+        The 1-based index of the first query result. A value less than 1 SHALL
+        be interpreted as 1.
+      schema:
+        type: integer
+        format: int64
+        default: 0
+    sortBy:
+      name: sortBy
+      in: query
+      description: >-
+        A string indicating the attribute whose value SHALL be used to order the
+        returned responses.
+      example: userName
+      schema:
+        type: string
+    sortOrder:
+      name: sortOrder
+      in: query
+      schema:
+        type: string
+        enum:
+          - ascending
+          - descending
+      description: >-
+        A string indicating the order in which the "sortBy" parameter is
+        applied.  Allowed values are "ascending" and "descending".
+      example: ascending
+    attributes:
+      name: attributes
+      in: query
+      description: >
+        A multi-valued list of strings indicating the names of resource
+        attributes to return in the response, overriding the set of attributes
+        that would be returned by default.
+      schema:
+        type: array
+        items:
+          type: string
+        example:
+          - userName
+          - displayName
+    excludedAttributes:
+      name: excludedAttributes
+      in: query
+      description: >
+        A multi-valued list of strings indicating the names of resource
+        attributes to be removed from the default set of attributes to return. 
+        This parameter SHALL have no effect on attributes whose schema
+        "returned" setting is "always".
+      schema:
+        type: array
+        items:
+          type: string
+        example:
+          - meta
+          - groups
+    forTime:
+      name: forTime
+      in: query
+      description: >
+        a date time indicating that the requested resources should be retrieved
+        from history as how they looked for the specified time.
+      schema:
+        type: string
+        format: date-time
+      example: 2020-18-01T15:04:05-07:00
+    id:
+      description: The resource type ID
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+      example: T9e682kLYG6iYFSjo5RJVW
+    parameters_id:
+      description: The job ID
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+      example: T1e642kLYG3iZYGjo5REVW
+  schemas:
+    attribute:
+      description: SCIM Attribute model.
+      type: object
+      properties:
+        name:
+          type: string
+          description: the name of the attribute.
+          example: phoneNumber
+        description:
+          type: string
+          description: a more detailed description.
+          example: phone numbers
+        type:
+          type: string
+          enum:
+            - string
+            - boolean
+            - binary
+            - decimal
+            - integer
+            - dateTime
+            - reference
+            - complex
+          example: string
+        referenceTypes:
+          type: array
+          description: indicates the resource types thatare referenced.
+          items:
+            type: string
+        multiValued:
+          type: boolean
+          description: true if this is a multi valued (array) attribute
+          example: false
+        required:
+          type: boolean
+          description: true if this attribute is required.
+        mutability:
+          type: string
+          enum:
+            - readOnly
+            - readWrite
+            - immutable
+            - writeOnly
+          example: readWrite
+        returned:
+          type: string
+          enum:
+            - always
+            - never
+            - default
+            - request
+          example: default
+        uniqueness:
+          type: string
+          enum:
+            - none
+            - server
+            - global
+        caseExact:
+          type: boolean
+          description: true if a string attribute is case sensitive.
+        canonicalValues:
+          type: array
+          description: >-
+            A collection of suggested canonical values that MAY be used (e.g.,
+            "work", "home")
+          items:
+            type: string
+          example: work
+        noRevision:
+          type: boolean
+          description: >-
+            true if a change of this attribute should not create a revision in
+            history.
+        subAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/attribute'
+        search:
+          type: object
+          properties:
+            boost:
+              type: integer
+              example: 1
+            fuzziness:
+              type: integer
+              example: 2
+      required:
+        - name
+        - type
+    meta:
+      description: Describes metadata of a model.
+      type: object
+      properties:
+        tenantId:
+          type: string
+        appId:
+          type: string
+        resourceType:
+          type: string
+        created:
+          type: string
+          format: date-time
+        lastModified:
+          type: string
+          format: date-time
+        revision:
+          type: number
+        location:
+          type: string
+      required:
+        - tenantId
+        - resourceType
+        - revision
+    scim_schema:
+      description: SCIM Schema model.
+      type: object
+      properties:
+        id:
+          type: string
+          description: unique identifier of the schema.
+        name:
+          type: string
+          description: the name of the schema.
+        description:
+          type: string
+          description: a more detailed description.
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/attribute'
+        meta:
+          $ref: '#/components/schemas/meta'
+    error:
+      type: object
+      properties:
+        status:
+          description: >-
+            The HTTP status code (see
+            [RFC7231](https://datatracker.ietf.org/doc/html/rfc7231#section-6))
+            expressed as a JSON string.
+          type: string
+          example: not_found
+        type:
+          description: A detail error keyword.
+          type: string
+          example: tooMany
+        detail:
+          description: >-
+            A message providing additional information about the error,
+            including  details to help resolve it when possible.
+          type: string
+          example: The resource you were accessing could not be found.
+        validation:
+          type: array
+          items:
+            properties:
+              propertyPath:
+                type: string
+              invalidValue:
+                type: string
+              message:
+                type: string
+      required:
+        - status
+    list:
+      description: A list of models.
+      type: object
+      additionalProperties: true
+      properties:
+        totalResults:
+          type: integer
+          format: int64
+          example: 100
+        itemsPerPage:
+          type: integer
+          example: 10
+        startIndex:
+          type: integer
+          format: int64
+          example: 1
+    resource_type_schema_ext:
+      description: ResourceType schema extension.
+      type: object
+      properties:
+        schema:
+          type: string
+          description: The id of the schema (e.g., "risk")
+        required:
+          type: boolean
+          description: True if every resource must have this schema extension.
+    resource_type:
+      description: ResourceType model.
+      type: object
+      properties:
+        id:
+          type: string
+          description: unique identifier of the resource type.
+        name:
+          type: string
+          description: >-
+            the resourec type name, starting with uppercase, no spaces allowed.
+            e.g. ("User", "ServiceAccount")
+        appId:
+          type: string
+          description: >-
+            all resource types belongs to some app, this is the identifier where
+            this resource type belongs to (e.g., "myapp")
+        description:
+          type: string
+          description: a more detailed description.
+        mode:
+          type: string
+          enum:
+            - local
+            - remote
+          description: >
+            *local* mode means that resources of this resource type are managed
+            internally within the store. where *remote* mode means that
+            resources
+
+            are managed externally, this remote mode, any changes made to
+            resources will be provisioned to the external app.
+        schema:
+          type: string
+          description: >-
+            The id of the primary schema for this resource type. (e.g.,
+            "scimUser")
+        schemaInterfaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/resource_type_schema_ext'
+          description: >-
+            a list of schema interfaces, each interface's attributes will be
+            merged directly into the primary schema.
+        schemaExtensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/resource_type_schema_ext'
+          description: >-
+            a list of schema extensions, each extension will be mounted into the
+            primary schema under its name.
+        toApp:
+          type: string
+          description: >
+            The ID of the mapper that maps attributes from this resource type
+            form to their app representation.
+
+
+            only applied for *remote* resources.
+        toStore:
+          type: string
+          description: >
+            The ID of the mapper that maps attributes from their app
+            representation to the form of this resource type.
+
+
+            only applied for *remote* resources.
+        ui:
+          type: object
+          description: Contains hints for the UI how to render this resource type.
+          properties:
+            overview:
+              type: array
+              items:
+                type: string
+              description: The attributes to display in the resource page.
+            edit:
+              type: array
+              items:
+                type: string
+              description: The attributes to let client edit.
+        meta:
+          $ref: '#/components/schemas/meta'
+    resource_type_list:
+      description: A list of resource types.
+      allOf:
+        - $ref: '#/components/schemas/list'
+        - type: object
+          required:
+            - Resources
+          additionalProperties: true
+          properties:
+            Resources:
+              type: array
+              items:
+                $ref: '#/components/schemas/resource_type'
+    job:
+      description: Job model.
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the job.
+        error:
+          type: string
+          description: Error message in case of a failure.
+        status:
+          type: string
+          enum:
+            - enqueued
+            - started
+            - failed
+            - fatal
+            - canceled
+            - success
+          description: The current status of the job.
+        statusCode:
+          type: number
+          description: >-
+            The current status code of the job, corresponds to http status
+            codes.
+        reason:
+          type: string
+          description: A descriptive reason describing the purpose of the job.
+        meta:
+          $ref: '#/components/schemas/meta'
+    resource:
+      description: Resource model.
+      type: object
+      properties:
+        id:
+          type: string
+          description: unique identifier of the schema.
+        meta:
+          $ref: '#/components/schemas/meta'
+        additionalProperties: true
+    resource_list:
+      description: A list of resources.
+      allOf:
+        - $ref: '#/components/schemas/list'
+        - type: object
+          required:
+            - Resources
+          additionalProperties: true
+          properties:
+            Resources:
+              type: array
+              items:
+                $ref: '#/components/schemas/resource'
+  examples:
+    createScimSchema:
+      value:
+        id: myAppUser
+        name: User
+        description: My App's User
+        attributes:
+          - name: userName
+            type: string
+    bad_request:
+      value:
+        status: '400'
+        detail: Bad Request
+    unauthorized:
+      value:
+        status: '401'
+        detail: client is not authenticated.
+    forbidden:
+      value:
+        status: '43'
+        detail: the request action is forbidden.
+    not_found:
+      value:
+        status: '404'
+        detail: The requested resource could not be found
+    too_many_requests:
+      value:
+        status: '429'
+        detail: API Rate limit exceeded.
+    internal_error:
+      value:
+        status: '500'
+        detail: Internal Server Error
+    scimSchema:
+      value:
+        id: myAppUser
+        name: User
+        description: My App's User
+        attributes:
+          - name: userName
+            type: string
+          - name: customerId
+            type: string
+        meta:
+          revision: 2
+          tenantId: acme
+          resourceType: SCIMSchema
+    replaceScimSchema:
+      value:
+        id: myAppUser
+        name: User
+        description: My App's User
+        attributes:
+          - name: userName
+            type: string
+          - name: customerId
+            type: string
+        meta:
+          revision: 2
+          tenantId: acme
+          resourceType: SCIMSchema
+    resourceTypeList:
+      value:
+        totalResults: 6
+        itemsPerPage: 10
+        startIndex: 0
+        Resources:
+          - id: T9e682kLYG6iYFSjo5RJVW
+            name: User
+            appId: cid
+            description: Represents an identity.
+            mode: local
+            schema: cidUser
+            schemaInterfaces:
+              - schema: user
+                required: true
+              - schema: identity
+                required: true
+            schemaExtensions:
+              - schema: ownership
+                required: false
+            ui:
+              overview:
+                - displayName
+                - title
+                - name
+                - name.givenName
+                - name.familyName
+              edit:
+                - userName
+                - displayName
+                - active
+                - userType
+                - name
+                - name.givenName
+                - name.familyName
+                - groups
+            meta:
+              tenantId: acme
+              appId: '-'
+              resourceType: ResourceType
+              created: 2021-09-13T19:00:14.646Z
+              lastModified: 2021-09-13T19:00:14.646Z
+              revision: 1
+              location: /resource-types/T9e682kLYG6iYFSjo5RJVW
+    createResourceType:
+      value:
+        name: User
+        appId: myApp
+        schema: scimUser
+        mode: local
+    resourceType:
+      value:
+        id: T9e682kLYG6iYFSjo5RJVW
+        name: User
+        appId: cid
+        description: Represents an identity.
+        mode: local
+        schema: cidUser
+        schemaInterfaces:
+          - schema: user
+            required: true
+          - schema: identity
+            required: true
+        schemaExtensions:
+          - schema: ownership
+            required: false
+        ui:
+          overview:
+            - displayName
+            - title
+            - name
+            - name.givenName
+            - name.familyName
+          edit:
+            - userName
+            - displayName
+            - active
+            - userType
+            - name
+            - name.givenName
+            - name.familyName
+            - groups
+        meta:
+          tenantId: acme
+          appId: '-'
+          resourceType: ResourceType
+          created: 2021-09-13T19:00:14.646Z
+          lastModified: 2021-09-13T19:00:14.646Z
+          revision: 1
+          location: /resource-types/T9e682kLYG6iYFSjo5RJVW
+    job:
+      value:
+        id: T1e642kLYG3iZYGjo5REVW
+        error: Item already exists.
+        status: fatal
+        statusCode: 500
+        reason: Creating a new user.
+        meta:
+          tenantId: acme
+          appId: '-'
+          resourceType: Job
+          created: 2021-09-13T19:00:14.646Z
+          lastModified: 2021-09-13T19:00:14.646Z
+          revision: 1
+          location: /jobs/T1e642kLYG3iZYGjo5REVW
+    resourceList:
+      value:
+        totalResults: 6
+        itemsPerPage: 10
+        startIndex: 0
+        Resources:
+          - id: HcRFTpgpmnUGSCEoj8wU4
+            displayName: John Doe
+            active: true
+            userName: john.doe@acme.io
+            name:
+              givenName: John
+              familyName: Doe
+            emails:
+              - primary: true
+                type: work
+                value: john.doe@acme.io
+            meta:
+              tenantId: acme
+              appId: iam
+              resourceType: User
+              created: 2021-09-13T19:00:14.646Z
+              lastModified: 2021-09-13T19:00:14.646Z
+              revision: 1
+              location: /resources/cid/Users/HcRFTpgpmnUGSCEoj8wU4
+  requestBodies:
+    create_schema:
+      description: A SCIM Schema, in JSON format.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/scim_schema'
+          examples:
+            schema:
+              $ref: '#/components/examples/createScimSchema'
+    replace_schema:
+      description: A SCIM Schema, in JSON format.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/scim_schema'
+          examples:
+            schema:
+              $ref: '#/components/examples/replaceScimSchema'
+    create_resource_type:
+      description: A Resource Type in JSON format.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/resource_type'
+          examples:
+            schema:
+              $ref: '#/components/examples/createResourceType'
+    replace_resource_type:
+      description: A Resource Type in JSON format.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/resource_type'
+          examples:
+            schema:
+              $ref: '#/components/examples/resourceType'
+  headers:
+    ratelimit-limit:
+      schema:
+        type: integer
+      example: 5000
+      description: >-
+        The default limit on number of requests that can be made per hour and
+        per minute. Current rate limits are 5000 requests per hour and 250
+        requests per minute.
+    ratelimit-remaining:
+      schema:
+        type: integer
+      example: 4816
+      description: >-
+        The number of requests in your hourly quota that remain before you hit
+        your request limit. See https://developers.crossid.io/apiv1#rate-limit
+        for information about how requests expire.
+    ratelimit-reset:
+      schema:
+        type: integer
+      example: 1444931833
+      description: >-
+        The time when the oldest request will expire. The value is given in Unix
+        epoch time. See https://developers.crossid.io/apiv1#rate-limit for
+        information about how requests expire.
+  responses:
+    default_error:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+          examples:
+            '400':
+              $ref: '#/components/examples/bad_request'
+            '401':
+              $ref: '#/components/examples/unauthorized'
+            '403':
+              $ref: '#/components/examples/forbidden'
+            '404':
+              $ref: '#/components/examples/not_found'
+            '429':
+              $ref: '#/components/examples/too_many_requests'
+            '500':
+              $ref: '#/components/examples/internal_error'
+      headers:
+        ratelimit-limit:
+          $ref: '#/components/headers/ratelimit-limit'
+        ratelimit-remaining:
+          $ref: '#/components/headers/ratelimit-remaining'
+        ratelimit-reset:
+          $ref: '#/components/headers/ratelimit-reset'
+    schema:
+      description: A SCIM schema, in JSON format.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/scim_schema'
+          examples:
+            schema:
+              $ref: '#/components/examples/scimSchema'
+      headers:
+        ratelimit-limit:
+          $ref: '#/components/headers/ratelimit-limit'
+        ratelimit-remaining:
+          $ref: '#/components/headers/ratelimit-remaining'
+        ratelimit-reset:
+          $ref: '#/components/headers/ratelimit-reset'
+    list_resource_types:
+      description: A paged list of resource types.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/resource_type_list'
+          examples:
+            resourceType:
+              $ref: '#/components/examples/resourceTypeList'
+      headers:
+        ratelimit-limit:
+          $ref: '#/components/headers/ratelimit-limit'
+        ratelimit-remaining:
+          $ref: '#/components/headers/ratelimit-remaining'
+        ratelimit-reset:
+          $ref: '#/components/headers/ratelimit-reset'
+    resource_type:
+      description: A Resource Type, in JSON format.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/resource_type'
+          examples:
+            schema:
+              $ref: '#/components/examples/resourceType'
+      headers:
+        ratelimit-limit:
+          $ref: '#/components/headers/ratelimit-limit'
+        ratelimit-remaining:
+          $ref: '#/components/headers/ratelimit-remaining'
+        ratelimit-reset:
+          $ref: '#/components/headers/ratelimit-reset'
+    job:
+      description: A Job, in JSON format.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/job'
+          examples:
+            schema:
+              $ref: '#/components/examples/job'
+      headers:
+        ratelimit-limit:
+          $ref: '#/components/headers/ratelimit-limit'
+        ratelimit-remaining:
+          $ref: '#/components/headers/ratelimit-remaining'
+        ratelimit-reset:
+          $ref: '#/components/headers/ratelimit-reset'
+    list_resources:
+      description: A paged list of resources.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/resource_list'
+          examples:
+            resourceType:
+              $ref: '#/components/examples/resourceList'
+      headers:
+        ratelimit-limit:
+          $ref: '#/components/headers/ratelimit-limit'
+        ratelimit-remaining:
+          $ref: '#/components/headers/ratelimit-remaining'
+        ratelimit-reset:
+          $ref: '#/components/headers/ratelimit-reset'
